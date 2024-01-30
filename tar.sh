@@ -15,11 +15,11 @@ function compress() {
 
 echo -n "Please enter file name :"
 
-read filename
+read -e filename
 
 echo -n "Enter the Output filename you have to give :"
 
-read tarfile
+read -e tarfile
 
 if [ ! -e ${filename} ]; then
 	echo "error"
@@ -33,7 +33,7 @@ function decompress() {
 	
 echo -n "Enter Filename to decompress : "
 
-read filenam
+read -e filenam
 
 if [! -e ${filenam} ]; then
 	echo "error"
