@@ -10,24 +10,37 @@ echo "2 => DECOMPRESS"
 
 read option 
 
-
 function compress() {
 
 echo -n "Please enter file name :"
 
 read -e filename
 
-echo -n "Enter the Output filename you have to give :"
+echo -n "Do you want to give Output file New name :"
 
-read -e tarfile
+echo "YES or NO"
 
-if [ ! -e ${filename} ]; then
-	echo "error"
-	exit 1
-else
-	echo $(tar -cvf ${tarfile}.tar ${filename})
+read answer
+
+if [ ${answer} = "yes" ]; then
+	
+	echo -n "Enter the Output filename you have to give :"
+
+	read -e tarfile
+
+		if [ ! -e $filename ]; then
+			echo "error"
+			exit 1
+		fi		
+	tar -cvf ${tarfile}.tar ${filename}
+
+else 
+	$(tar -cvf ${filename}.tar ${filename})
+	exit 0 
 fi
+
 }
+
 
 function decompress() {
 	
@@ -35,11 +48,10 @@ echo -n "Enter Filename to decompress : "
 
 read -e filenam
 
-if [! -e ${filenam} ]; then
-	echo "error"
-	exit 1
+if [ -d ${filenam} ] || [ -f ${filenam} ]; then
+	echo $(tar -xvf ${filenam})
 else 
-	echo $(tar -xvf ${filenam}.tar)
+	echo "error"
 fi
 }
 
