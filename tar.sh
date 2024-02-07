@@ -2,6 +2,11 @@
 
 echo "This Script will automatically compress & Decompress file"
 
+echo "##########################################################"
+echo "##########################################################"
+echo "######################Welcome#############################"
+echo "##########################################################"
+
 echo "Do you want to compress or decompress"
 
 echo "CHOOSE"
@@ -20,6 +25,8 @@ echo -n "Do you want to give Output file New name :"
 
 echo "YES or NO"
 
+echo -n " ==>> "
+
 read answer
 
 if [ ${answer} = "yes" ]; then
@@ -30,13 +37,12 @@ if [ ${answer} = "yes" ]; then
 
 		if [ ! -e $filename ]; then
 			echo "error"
-			exit 1
 		fi		
-	tar -cvf ${tarfile}.tar ${filename}
+		$(sudo tar -cvf ${tarfile}.tar ${filename})
 
 else 
-	$(tar -cvf ${filename}.tar ${filename})
-	exit 0 
+	$(sudo tar -cvf ${filename}.tar ${filename})
+
 fi
 
 }
@@ -49,7 +55,7 @@ echo -n "Enter Filename to decompress : "
 read -e filenam
 
 if [ -d ${filenam} ] || [ -f ${filenam} ]; then
-	echo $(tar -xvf ${filenam})
+	echo $(sudo tar -xvf ${filenam})
 else 
 	echo "error"
 fi
